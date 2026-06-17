@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>POSTR - Post Subscription Tracker | YouTube Post Tracker</title>
+    <link rel="stylesheet" href="popup.css">
+  </head>
+  <body>
+    <main class="app">
+      <header class="topbar">
+        <div class="brand-lockup">
+          <div class="brand-mark" aria-hidden="true">
+            <img src="icons/icon-48.png" alt="">
+          </div>
+          <div>
+            <h1>POSTR</h1>
+            <p class="tagline">Post Subscription Tracker</p>
+          </div>
+        </div>
+        <button id="checkNowButton" class="icon-button" type="button" title="Check now" aria-label="Check now">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M21 12a9 9 0 0 1-15.3 6.4M3 12A9 9 0 0 1 18.3 5.6"/>
+            <path d="M21 4v6h-6M3 20v-6h6"/>
+          </svg>
+        </button>
+      </header>
+
+      <section class="overview" aria-label="POSTR overview">
+        <div>
+          <span class="metric-label">Unread</span>
+          <strong id="overviewUnread">0</strong>
+        </div>
+        <div>
+          <span class="metric-label">Channels</span>
+          <strong id="overviewChannels">0</strong>
+        </div>
+        <div>
+          <span class="metric-label">Cadence</span>
+          <strong id="overviewInterval">1 hr</strong>
+        </div>
+      </section>
+
+      <section class="status-row" aria-live="polite">
+        <span id="runStatus">POSTR is ready</span>
+        <span id="lastRun">Never checked</span>
+      </section>
+
+      <form id="channelForm" class="form">
+        <label>
+          <span>Name</span>
+          <input id="channelName" type="text" autocomplete="off" placeholder="Creator name">
+        </label>
+        <label>
+          <span>Posts URL</span>
+          <input id="postsUrl" type="url" autocomplete="off" placeholder="https://www.youtube.com/@handle/posts" required>
+        </label>
+        <button class="primary" type="submit">Add Channel</button>
+      </form>
+
+      <section class="controls">
+        <label>
+          <span>Check every</span>
+          <select id="intervalSelect">
+            <option value="15">15 min</option>
+            <option value="30">30 min</option>
+            <option value="60">1 hr</option>
+            <option value="180">3 hr</option>
+            <option value="360">6 hr</option>
+          </select>
+        </label>
+      </section>
+
+      <section>
+        <div class="section-heading">
+          <h2>Unread</h2>
+          <div class="heading-actions">
+            <span id="unreadCount">0</span>
+            <button id="markAllReadButton" class="text-button" type="button">Mark all read</button>
+          </div>
+        </div>
+        <ul id="unreadList" class="unread-list"></ul>
+        <p id="emptyUnreadState" class="empty compact">No unread posts.</p>
+      </section>
+
+      <section>
+        <div class="section-heading">
+          <h2>Channels</h2>
+          <span id="channelCount">0</span>
+        </div>
+        <ul id="channelList" class="channel-list"></ul>
+        <p id="emptyState" class="empty">Add a channel's YouTube Posts URL to start watching.</p>
+      </section>
+    </main>
+
+    <template id="channelTemplate">
+      <li class="channel">
+        <div class="channel-main">
+          <a class="channel-name" target="_blank" rel="noreferrer"></a>
+          <p class="channel-meta"></p>
+          <p class="channel-last"></p>
+        </div>
+        <div class="channel-actions">
+          <button class="test-button" type="button" title="Test notification" aria-label="Test notification">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 7h18s-3 0-3-7"/>
+              <path d="M13.7 21a2 2 0 0 1-3.4 0"/>
+            </svg>
+          </button>
+          <button class="remove-button" type="button" title="Remove" aria-label="Remove">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M3 6h18"/>
+              <path d="M8 6V4h8v2"/>
+              <path d="m19 6-1 14H6L5 6"/>
+              <path d="M10 11v6M14 11v6"/>
+            </svg>
+          </button>
+        </div>
+      </li>
+    </template>
+
+    <template id="unreadTemplate">
+      <li class="unread-item">
+        <div class="unread-main">
+          <a class="unread-channel" target="_blank" rel="noreferrer"></a>
+          <p class="unread-text"></p>
+          <p class="unread-time"></p>
+        </div>
+        <button class="mark-read-button" type="button" title="Mark read" aria-label="Mark read">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M20 6 9 17l-5-5"/>
+          </svg>
+        </button>
+      </li>
+    </template>
+
+    <script src="popup.js"></script>
+  </body>
+</html>

@@ -1,0 +1,29 @@
+{
+  "manifest_version": 3,
+  "name": "POSTR - Post Subscription Tracker | YouTube Post Tracker",
+  "version": "1.0.0",
+  "description": "Get notified when watched YouTube channels publish new Posts.",
+  "permissions": ["alarms", "notifications", "storage"],
+  "host_permissions": ["https://www.youtube.com/*"],
+  "background": {
+    "service_worker": "service_worker.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://www.youtube.com/*"],
+      "js": ["content_script.js"],
+      "css": ["content_script.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_title": "POSTR - Post Subscription Tracker | YouTube Post Tracker",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "icons/icon-16.png",
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  }
+}
