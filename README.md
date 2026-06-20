@@ -28,6 +28,8 @@ It is built for YouTube community-style posts, not videos.
 
 After editing files, reload POSTR from `chrome://extensions` so Chrome uses the latest code.
 
+Or, go to https://chromewebstore.google.com/detail/postr-post-subscription-t/lnillkkncmfedlniijhekdfbkneckned and directly download it from the Chrome Web Store.
+
 ## Popup Buttons and Controls
 
 ### Refresh Button
